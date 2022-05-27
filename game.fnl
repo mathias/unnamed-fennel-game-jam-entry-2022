@@ -1,5 +1,4 @@
-; (local fennel (require "lib.fennel"))
-; (local repl (require "lib.stdio"))
+(local fennel (require "fennel"))
 (local lume (require "lume"))
 
 (var current_color [1 1 1 1])
@@ -31,3 +30,25 @@
         (print "Reloading")
         (lume.hotswap "main")
         (lume.hotswap "game"))))
+
+;; scratch
+(local genes "01234abcdeFGHI56789ABCDE")
+(local bs ["A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P"
+           "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" "a" "b" "c" "d" "e" "f"
+           "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v"
+           "w" "x" "y" "z" "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "+" "/"])
+
+(fn genes_to_values [str]
+  (let [output []]
+    (each [c (str:gmatch ".")]
+      (table.insert output (string.byte c)))
+    output))
+
+(fn values_to_genes [lst]
+  (let [output ""]
+    (each [b lst]
+      (set output (concat output (string.char b))))
+    ))
+
+
+(print (fennel.view (genes_to_values genes)))
