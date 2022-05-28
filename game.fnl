@@ -1,5 +1,6 @@
 (local fennel (require "fennel"))
 (local lume (require "lume"))
+(local util (require "util"))
 
 (var current_color [1 1 1 1])
 
@@ -44,11 +45,12 @@
       (table.insert output (string.byte c)))
     output))
 
+
+
 (fn values_to_genes [lst]
-  (let [output ""]
-    (each [b lst]
-      (set output (concat output (string.char b))))
-    ))
+  (var output "")
+  (each [k v (ipairs lst)] (set output (.. output (string.char v))))
+  output)
 
-
-(print (fennel.view (genes_to_values genes)))
+(util.pp (genes_to_values genes))
+(util.pp (values_to_genes (genes_to_values genes)))
