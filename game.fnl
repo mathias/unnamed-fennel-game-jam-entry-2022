@@ -5,7 +5,6 @@
 (var current_color [1 1 1 1])
 
 (fn love.load []
-                                        ; (repl.start)
   )
 
 (fn love.draw []
@@ -32,7 +31,7 @@
         (lume.hotswap "main")
         (lume.hotswap "game"))))
 
-;; scratch
+;; Genes encoding/decoding
 (local genes "01234abcdeFGHI56789ABCDE")
 (local bs ["A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P"
            "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" "a" "b" "c" "d" "e" "f"
@@ -44,8 +43,6 @@
     (each [c (str:gmatch ".")]
       (table.insert output (string.byte c)))
     output))
-
-
 
 (fn values_to_genes [lst]
   (var output "")
