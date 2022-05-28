@@ -21,15 +21,17 @@
       (= pressed_key "r")
       (set current_color [1 0 0 1])
       (= pressed_key "w")
-      (set current_color [1 1 1 1])
-      ;; game controls + dev bindings
-      (= pressed_key "escape")
-      (love.event.quit)
-      (= pressed_key "tab")
-      (do
-        (print "Reloading")
-        (lume.hotswap "main")
-        (lume.hotswap "game"))))
+      (set current_color [1 1 1 1]))
+
+  ;; game controls + dev bindings
+  (when (= pressed_key "tab")
+    (do
+      (print "Reloading")
+      (lume.hotswap "main")
+      (lume.hotswap "game")))
+  (when (= pressed_key "escape")
+    (love.event.quit))
+  )
 
 ;; Genes encoding/decoding
 (local genes "01234abcdeFGHI56789ABCDE")
