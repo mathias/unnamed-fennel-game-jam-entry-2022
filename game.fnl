@@ -2,10 +2,27 @@
 (local lume (require "lume"))
 (local util (require "util"))
 
+(local mode {:menu
+             {:name "menu"
+              :update (fn update [])
+              :keypressed (fn keypressed [key set-mode]
+                            (when (= key "return") (set-mode "modes.playing")))
+              :draw (fn draw []
+                      (love.graphics.printf "Unnamed Fennel Game Jam entry. Hit enter to play."))}
+             :playing {}
+             })
+
+(var current-mode mode.menu)
+(fn set-mode [mn ...]
+  (set current-mode mn)
+  (when current-mode.init
+    (current-mode.init ...)))
+
 (fn love.load []
 )
 
 (fn love.draw []
+  (current-mode.draw)
 )
 
 (fn love.keypressed [pressed_key]
@@ -34,11 +51,11 @@
   (each [k v (ipairs lst)] (set output (.. output (string.char v))))
   output)
 
-(local genes "01234abcdeFGHI56789ABCDE")
-(local bs ["A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P"
-           "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" "a" "b" "c" "d" "e" "f"
-           "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v"
-           "w" "x" "y" "z" "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "+" "/"])
+;; (local genes "01234abcdeFGHI56789ABCDE")
+;; (local bs ["A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P"
+;;            "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" "a" "b" "c" "d" "e" "f"
+;;            "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v"
+;;            "w" "x" "y" "z" "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "+" "/"])
 
-(util.pp (genes_to_values genes))
-(util.pp (values_to_genes (genes_to_values genes)))
+;; (util.pp (genes_to_values genes))
+;; (util.pp (values_to_genes (genes_to_values genes)))
